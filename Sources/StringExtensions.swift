@@ -28,15 +28,15 @@ public extension String {
 	// https://gist.github.com/stevenschobert/540dd33e828461916c11
 	func camelize() -> String {
 		let source = clean(with: " ", allOf: "-", "_")
-		if source.characters.contains(" ") {
+		if source.contains(" ") {
 			let first = self[self.startIndex...self.index(after: startIndex)] //source.substringToIndex(source.index(after: startIndex))
 			let cammel = source.capitalized.replacingOccurrences(of: " ", with: "")
 			//            let cammel = String(format: "%@", strip)
-			let rest = String(cammel.characters.dropFirst())
+			let rest = String(cammel.dropFirst())
 			return "\(first)\(rest)"
 		} else {
 			let first = source[self.startIndex...self.index(after: startIndex)].lowercased()
-			let rest = String(source.characters.dropFirst())
+			let rest = String(source.dropFirst())
 			return "\(first)\(rest)"
 		}
 	}
@@ -129,7 +129,7 @@ public extension String {
 	}
 
 	func isAlpha() -> Bool {
-		for chr in characters {
+		for chr in self {
 			if (!(chr >= "a" && chr <= "z") && !(chr >= "A" && chr <= "Z") ) {
 				return false
 			}
@@ -175,7 +175,7 @@ public extension String {
 
 	var length: Int {
 		get {
-			return self.characters.count
+			return self.count
 		}
 	}
 
@@ -206,7 +206,7 @@ public extension String {
 	}
 
 	func split(_ separator: Character = " ") -> [String] {
-		return characters.split{$0 == separator}.map(String.init)
+		return self.split{$0 == separator}.map(String.init)
 	}
 
 	func startsWith(_ prefix: String) -> Bool {
@@ -282,8 +282,8 @@ public extension String {
 
 	subscript(_ r: CountableRange<Int>) -> String {
 		get {
-			let startIndex = self.characters.index(self.startIndex, offsetBy: r.lowerBound)
-			let endIndex = self.characters.index(self.startIndex, offsetBy: r.upperBound)
+			let startIndex = self.index(self.startIndex, offsetBy: r.lowerBound)
+			let endIndex = self.index(self.startIndex, offsetBy: r.upperBound)
 			return self[startIndex..<endIndex]
 		}
 	}
@@ -318,14 +318,14 @@ public extension String {
 	}
 
 	func substring(_ startIndex: Int, length: Int) -> String {
-		let start = self.characters.index(self.startIndex, offsetBy: startIndex)
-		let end = self.characters.index(self.startIndex, offsetBy: startIndex + length)
+		let start = self.index(self.startIndex, offsetBy: startIndex)
+		let end = self.index(self.startIndex, offsetBy: startIndex + length)
 		return self[start..<end]
 	}
 
 	subscript(i: Int) -> Character {
 		get {
-			let index = self.characters.index(self.startIndex, offsetBy: i)
+			let index = self.index(self.startIndex, offsetBy: i)
 			return self[index]
 		}
 	}
@@ -464,7 +464,7 @@ public extension String {
 		#else
 			let regex = try? NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
 		#endif
-		return regex?.firstMatch(in: self, options: [], range: NSMakeRange(0, self.characters.count)) != nil
+		return regex?.firstMatch(in: self, options: [], range: NSMakeRange(0, self.count)) != nil
 	}
 
 

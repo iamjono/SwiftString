@@ -16,7 +16,7 @@ class SwiftStringTests: XCTestCase {
 
 	func testBetween() {
 		let s = "The stupid brown fox"
-		XCTAssert(((s.between("stupid", "fox")?.characters.count) != nil), "Between is invalid")
+		XCTAssert(((s.between("stupid", "fox")?.count) != nil), "Between is invalid")
 	}
 	func testCamelize() {
 		let s = "The stupid brown fox"
