@@ -26,6 +26,9 @@ public extension String {
 	}
 
 	// https://gist.github.com/stevenschobert/540dd33e828461916c11
+	/// Camel Cases the calling string.
+	///
+	/// - Returns: A new string in Camel Case stripped of whitespace and punctuation.
 	func camelize() -> String {
 		let source = clean(with: " ", allOf: "-", "_")
 		if source.contains(" ") {
@@ -41,6 +44,7 @@ public extension String {
 		}
 	}
 
+	
 	func capitalize() -> String {
 		return capitalized
 	}
@@ -49,6 +53,11 @@ public extension String {
 	//        return range(of: substring) != nil
 	//    }
 
+	
+	/// Strips the calling string of the supplied prefix.
+	///
+	/// - Parameter prefix: The substring to strip from the head of the calling string.
+	/// - Returns: A new string, stripped of the supplied prefix.
 	func chompLeft(_ prefix: String) -> String {
 		if let prefixRange = range(of: prefix) {
 			if prefixRange.upperBound >= endIndex {
@@ -59,7 +68,11 @@ public extension String {
 		}
 		return self
 	}
-
+	
+	/// Strips the calling string of the supplied suffix.
+	///
+	/// - Parameter suffix: The subscring to strip from the tail of the calling string.
+	/// - Returns: A new string, stripped of the supplied suffix.
 	func chompRight(_ suffix: String) -> String {
 		if let suffixRange = range(of: suffix, options: .backwards) {
 			if suffixRange.upperBound >= endIndex {
@@ -71,11 +84,22 @@ public extension String {
 		return self
 	}
 
+	
+	/// Strips the calling string of whitespace and newlines
+	///
+	/// - Returns: A new string stripped of whitespace and newlines.
 	func collapseWhitespace() -> String {
 		let thecomponents = components(separatedBy: NSCharacterSet.whitespacesAndNewlines).filter { !$0.isEmpty }
 		return thecomponents.joined(separator: " ")
 	}
-
+	
+	
+	/// Performs a find and replace operation on the calling string
+	///
+	/// - Parameters:
+	///   - with: The string to replace each occurance of 'allOf' with.
+	///   - allOf: The strings to find in the calling string.
+	/// - Returns: A new string with all instances of **allOf** replaces with **with**
 	func clean(with: String, allOf: String...) -> String {
 		var string = self
 		for target in allOf {
@@ -84,14 +108,28 @@ public extension String {
 		return string
 	}
 
+	
+	/// Counts occurances of the **substring** in the calling string.
+	///
+	/// - Parameter substring: The string to count occurances of
+	/// - Returns: The number of times that **substring** occurs in the calling string.
 	func count(_ substring: String) -> Int {
 		return components(separatedBy: substring).count-1
 	}
 
+	
+	/// Determines whether the calling string ends in **suffix**
+	///
+	/// - Parameter suffix: The substring to check that the calling string ends in
+	/// - Returns: A bool repressenting whether the calling string ends in **suffix**
 	func endsWith(_ suffix: String) -> Bool {
 		return hasSuffix(suffix)
 	}
-
+	
+	/// Ensures that the calling string is prefixed with the supplied string.
+	///
+	/// - Parameter prefix: The string to ensure is left of the original string.
+	/// - Returns: A string ensured to be prefixed with the supplied string.
 	func ensureLeft(_ prefix: String) -> String {
 		if startsWith(prefix) {
 			return self
@@ -100,6 +138,11 @@ public extension String {
 		}
 	}
 
+	
+	/// Ensures that the calling string is suffixed with the supplied string.
+	///
+	/// - Parameter suffix: The string to ensure is appended to the original string.
+	/// - Returns: A string ensured to be suffixed with the supplied string.
 	func ensureRight(_ suffix: String) -> String {
 		if endsWith(suffix) {
 			return self
@@ -117,17 +160,26 @@ public extension String {
 		return nil
 	}
 
+	
+	/// Finds the first character of each word in the calling string
+	///
+	/// - Returns: Returns a new string containing the first letter of each word in the calling string
 	func initials() -> String {
 		let words = self.components(separatedBy: " ")
 		return words.reduce(""){$0 + $1[startIndex...startIndex]}
 		//		return words.reduce(""){$0 + $1[0...0]}
 	}
-
+	
+	
+	/// Finds the first character of the first and last word in the calling string
+	///
+	/// - Returns: Returns a new string containing the first letters of the first and last words in the calling string
 	func initialsFirstAndLast() -> String {
 		let words = self.components(separatedBy: " ")
 		return words.reduce("") { ($0 == "" ? "" : $0[startIndex...startIndex]) + $1[startIndex...startIndex]}
 	}
-
+	
+	/// Determines whether the calling string contains only alpha characters
 	func isAlpha() -> Bool {
 		for chr in self {
 			if (!(chr >= "a" && chr <= "z") && !(chr >= "A" && chr <= "Z") ) {
@@ -136,7 +188,9 @@ public extension String {
 		}
 		return true
 	}
-
+	
+	
+	/// Determines whether the calling string contains only letters and numbers
 	func isAlphaNumeric() -> Bool {
 		let alphaNumeric = NSCharacterSet.alphanumerics
 		let output = self.unicodeScalars.split { !alphaNumeric.contains($0)}.map(String.init)
@@ -149,17 +203,20 @@ public extension String {
 		//        return componentsSeparatedByCharactersInSet(alphaNumeric).joinWithSeparator("").length == 0
 	}
 
+	
+	/// Determines whether the calling string contains any characters
 	func isEmpty() -> Bool {
 		return self.trimmingCharacters(in: .whitespacesAndNewlines).length == 0
 	}
 
+	/// Determines whether the calling string contains only numerical digits or decimal separators
 	func isNumeric() -> Bool {
 		if let _ = defaultNumberFormatter().number(from: self) {
 			return true
 		}
 		return false
 	}
-
+	
 	private func join<S: Sequence>(_ elements: S) -> String {
 		return elements.map{String(describing: $0)}.joined(separator: self)
 	}
@@ -168,25 +225,43 @@ public extension String {
 		return self.folding(options: .diacriticInsensitive, locale: .current)
 		//		stringByFoldingWithOptions(.DiacriticInsensitiveSearch, locale: NSLocale.currentLocale())
 	}
-
+	
+	/// Breaks the calling string into an array delimited by newline characters
+	///
+	/// - Returns: A new string array containing each line of the calling string
 	func lines() -> [String] {
 		return self.components(separatedBy: NSCharacterSet.newlines)
 	}
-
+	
+	// TODO: Add deprecation to this
 	var length: Int {
 		get {
 			return self.count
 		}
 	}
-
+	
+	/// Creates a new string wrapped in the specified string *n* times.
+	///
+	/// - Parameters:
+	///   - n: The number of times to add **string**
+	///   - string: The string to wrap the calling string in. Defaults to " ".
+	/// - Returns: A new string padded with **string**, **n** times
 	func pad(_ n: Int, _ string: String = " ") -> String {
 		return "".join([string.times(n), self, string.times(n)])
 	}
 
+	
+	/// Creates a new string left padded with "**string**" "**n**" times
+	///
+	/// - Parameters:
+	///   - n: The number of times to add **string**
+	///   - string: The string to pad the calling string's head with. Defaults to " ".
+	/// - Returns: A new string with **string**
 	func padLeft(_ n: Int, _ string: String = " ") -> String {
 		return "".join([string.times(n), self])
 	}
 
+	
 	func padRight(_ n: Int, _ string: String = " ") -> String {
 		return "".join([self, string.times(n)])
 	}
