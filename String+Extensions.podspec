@@ -8,22 +8,20 @@
 
 Pod::Spec.new do |s|
   s.name             = 'String+Extensions'
-  s.version          = '1.1.0'
+  s.version          = '2.0.4'
   s.summary          = 'A lightweight string extension for Swift'
 
   s.description      = <<-DESC
-String+Extensions is a lightweight string extension for Swift 3.
-This library was motivated by having to search StackOverflow for common string operations, and wanting them to be in one place with test coverage.
+SwiftString is a lightweight string extension for Swift 3 and 4. This library was motivated by having to search StackOverflow for common string operations, and wanting them to be in one place with test coverage.
 
 Note the original client side Swift 2 repo can be found here: https://github.com/amayne/SwiftString
-                       DESC
+DESC
 
   s.homepage         = 'https://github.com/iamjono/SwiftString'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.authors          = {
     "Andrew Mayne" => "andrew@redbricklab.com",
-    "Jonathan Guthrie" => "jono@guthrie.net.nz",
-    "Koji Murata" => 'malt.koji@gmail.com'
+    "Jonathan Guthrie" => "jono@guthrie.net.nz"
   }
   s.source           = { :git => 'https://github.com/iamjono/SwiftString.git', :tag => s.version.to_s }
 
