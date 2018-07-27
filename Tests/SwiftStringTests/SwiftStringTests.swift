@@ -30,6 +30,12 @@ class SwiftStringTests: XCTestCase {
 		let s = "The stupid brown Fox"
 		XCTAssertEqual(s.chompLeft("The "), "stupid brown Fox", "ChompLeft is invalid")
 	}
+    
+    func testTimes() {
+        let fivetimes = "hhhhh"
+        let fivetimesComputed = "h".times(5)
+        XCTAssertEqual(fivetimes,fivetimesComputed, "times is not working")
+    }
 
 	func testChompRight() {
 		let s = "The stupid brown Fox"
