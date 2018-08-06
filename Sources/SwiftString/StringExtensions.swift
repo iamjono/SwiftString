@@ -21,7 +21,7 @@ public extension String {
 				left != right && leftRange.upperBound != rightRange.lowerBound
             else { return nil }
 
-		return self[leftRange.upperBound...index(before: rightRange.lowerBound)]
+		return String(self[leftRange.upperBound...index(before: rightRange.lowerBound)])
 
     }
     
@@ -52,9 +52,9 @@ public extension String {
     func chompLeft(_ prefix: String) -> String {
         if let prefixRange = range(of: prefix) {
             if prefixRange.upperBound >= endIndex {
-                return self[startIndex..<prefixRange.lowerBound]
+                return String(self[startIndex..<prefixRange.lowerBound])
             } else {
-                return self[prefixRange.upperBound..<endIndex]
+                return String(self[prefixRange.upperBound..<endIndex])
             }
         }
         return self
@@ -63,9 +63,9 @@ public extension String {
     func chompRight(_ suffix: String) -> String {
 		if let suffixRange = range(of: suffix, options: .backwards) {
             if suffixRange.upperBound >= endIndex {
-                return self[startIndex..<suffixRange.lowerBound]
+                return String(self[startIndex..<suffixRange.lowerBound])
             } else {
-                return self[suffixRange.upperBound..<endIndex]
+                return String(self[suffixRange.upperBound..<endIndex])
             }
         }
         return self
@@ -125,7 +125,7 @@ public extension String {
     
     func initialsFirstAndLast() -> String {
 		let words = self.components(separatedBy: " ")
-        return words.reduce("") { ($0 == "" ? "" : $0[startIndex...startIndex]) + $1[startIndex...startIndex]}
+        return words.reduce("") { ($0 == "" ? "" : String($0[startIndex...startIndex])) + $1[startIndex...startIndex]}
     }
     
     func isAlpha() -> Bool {
@@ -221,8 +221,11 @@ public extension String {
             .joined(separator: " ")
     }
     
+    @available(*, deprecated:7.0,message: "Use String(repeating,count)")
     func times(_ n: Int) -> String {
-        return (0..<n).reduce("") { $0.0 + self }
+        //return (0..<n).reduce("") { $0 + self }
+
+        return String(repeating: self, count: n)
     }
     
     func toFloat() -> Float? {
@@ -264,14 +267,14 @@ public extension String {
     
     func trimmedLeft() -> String {
         if let range = rangeOfCharacter(from: NSCharacterSet.whitespacesAndNewlines.inverted) {
-            return self[range.lowerBound..<endIndex]
+            return String(self[range.lowerBound..<endIndex])
         }
         return self
     }
     
     func trimmedRight() -> String {
         if let range = rangeOfCharacter(from: NSCharacterSet.whitespacesAndNewlines.inverted, options: NSString.CompareOptions.backwards) {
-            return self[startIndex..<range.upperBound]
+            return String(self[startIndex..<range.upperBound])
         }
         return self
     }
@@ -284,7 +287,7 @@ public extension String {
         get {
             let startIndex = self.index(self.startIndex, offsetBy: r.lowerBound)
             let endIndex = self.index(self.startIndex, offsetBy: r.upperBound)
-            return self[startIndex..<endIndex]
+            return String(self[startIndex..<endIndex])
         }
     }
     
@@ -301,7 +304,7 @@ public extension String {
             let upper = range.upperBound < 0 ? 0 : range.upperBound
             let s = index(startIndex, offsetBy: lower, limitedBy: endIndex) ?? endIndex
             let e = index(startIndex, offsetBy: upper, limitedBy: endIndex) ?? endIndex
-            return self[s..<e]
+            return String(self[s..<e])
         }
     }
     
@@ -313,14 +316,14 @@ public extension String {
             let upper = range.upperBound < 0 ? 0 : range.upperBound
             let s = index(startIndex, offsetBy: lower, limitedBy: closedEndIndex) ?? closedEndIndex
             let e = index(startIndex, offsetBy: upper, limitedBy: closedEndIndex) ?? closedEndIndex
-            return self[s...e]
+            return String(self[s...e])
         }
     }
     
     func substring(_ startIndex: Int, length: Int) -> String {
         let start = self.index(self.startIndex, offsetBy: startIndex)
         let end = self.index(self.startIndex, offsetBy: startIndex + length)
-        return self[start..<end]
+        return String(self[start..<end])
     }
     
     subscript(i: Int) -> Character {

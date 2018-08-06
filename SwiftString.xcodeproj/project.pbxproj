@@ -31,7 +31,7 @@
 		OBJ_10 /* StringHTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHTML.swift; sourceTree = "<group>"; };
 		OBJ_13 /* SwiftStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftStringTests.swift; sourceTree = "<group>"; };
 		OBJ_15 /* SwiftString.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftString.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		OBJ_16 /* SwiftStringTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = SwiftStringTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_16 /* SwiftStringTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = SwiftStringTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		OBJ_9 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,6 +154,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 9999;
+				TargetAttributes = {
+					OBJ_17 = {
+						LastSwiftMigration = 0940;
+					};
+					OBJ_25 = {
+						LastSwiftMigration = 0940;
+					};
+				};
 			};
 			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "SwiftString" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -220,6 +228,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = SwiftString;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGET_NAME = SwiftString;
 			};
 			name = Debug;
@@ -240,6 +250,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = SwiftString;
 				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGET_NAME = SwiftString;
 			};
 			name = Release;
@@ -257,6 +269,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGET_NAME = SwiftStringTests;
 			};
 			name = Debug;
@@ -274,6 +288,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGET_NAME = SwiftStringTests;
 			};
 			name = Release;

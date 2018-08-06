@@ -273,6 +273,12 @@ class SwiftStringTests: XCTestCase {
 		let decoded = encoded.fromBase64()
 		XCTAssertEqual(str, decoded, "Base64 does not match")
 	}
+    
+    func testtimes() {
+        let fivetimesc = "ccccc"
+        let fivetimescComputed = "c".times(5)
+        XCTAssertEqual(fivetimesc, fivetimescComputed, "times doesnt work properly")
+    }
 
 	static var allTests : [(String, (SwiftStringTests) -> () throws -> Void)] {
 		return [
@@ -313,6 +319,7 @@ class SwiftStringTests: XCTestCase {
 			("testsubstring", testsubstring),
 			("testsubscript", testsubscript),
 			("testsafesubscript", testsafesubscript),
+            ("testtimes", testtimes)
 		]
 	}
 
