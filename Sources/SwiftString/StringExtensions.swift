@@ -345,7 +345,7 @@ public extension String {
 //	}
 	
 	/// The first index of the given string
-	public func indexRaw(of str: String, after: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> String.Index? {
+	func indexRaw(of str: String, after: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> String.Index? {
 		guard str.length > 0 else {
 			// Can't look for nothing
 			return nil
@@ -359,7 +359,7 @@ public extension String {
 		return self.range(of: str, options: options.removing(.backwards), range: startRange, locale: locale)?.lowerBound
 	}
 	
-	public func index(of str: String, after: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> Int {
+	func index(of str: String, after: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> Int {
 		guard let index = indexRaw(of: str, after: after, options: options, locale: locale) else {
 			return -1
 		}
@@ -367,7 +367,7 @@ public extension String {
 	}
 	
 	/// The last index of the given string
-	public func lastIndexRaw(of str: String, before: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> String.Index? {
+	func lastIndexRaw(of str: String, before: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> String.Index? {
 		guard str.length > 0 else {
 			// Can't look for nothing
 			return nil
@@ -381,7 +381,7 @@ public extension String {
 		return self.range(of: str, options: options.inserting(.backwards), range: startRange, locale: locale)?.lowerBound
 	}
 	
-	public func lastIndex(of str: String, before: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> Int {
+	func lastIndex(of str: String, before: Int = 0, options: String.CompareOptions = .literal, locale: Locale? = nil) -> Int {
 		guard let index = lastIndexRaw(of: str, before: before, options: options, locale: locale) else {
 			return -1
 		}

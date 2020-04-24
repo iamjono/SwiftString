@@ -12,7 +12,7 @@ private let parentBacktrackRegex = "([^/]*)?\\/+\\.\\."
 public extension String {
 	/// The parent directory or url
 	/// i.e. calling `"/foo/bar/baz".parent` will return `"/foo/bar"`
-	public var parent: String? {
+	var parent: String? {
 		var ref = self
 		if self.lastIndex(of: "/") == self.length - 1 {
 			ref = self[0..<self.length - 1]
@@ -26,7 +26,7 @@ public extension String {
 	}
 	/// The full file or directory name and extension
 	/// i.e. calling `"/foo/bar/baz.txt".file` will return `"baz.txt"`
-	public var file: String? {
+	var file: String? {
 		var ref = self
 		if self.lastIndex(of: "/") == self.length - 1 {
 			ref = self[0..<self.length - 1]
@@ -41,7 +41,7 @@ public extension String {
 	}
 	/// The file or directory name without extension
 	/// i.e. calling `"/foo/bar/baz.txt".file` will return `"baz"`
-	public var fileName: String? {
+	var fileName: String? {
 		guard let f = file else {
 			return nil
 		}
@@ -54,7 +54,7 @@ public extension String {
 	}
 	/// The file or directory extension
 	/// i.e. calling `"/foo/bar/baz.txt".file` will return `"txt"`
-	public var `extension`: String? {
+	var `extension`: String? {
 		guard let f = file else {
 			return nil
 		}
@@ -68,12 +68,12 @@ public extension String {
 	
 	/// The file path, but removing all double slashes (//) and resolving 'back' paths (..)
 	/// i.e. calling `cleanPath` on `"/foo///bar/baz/../thing.txt"` would result in `"/foo/bar/thing.txt"`
-	public mutating func cleanPath() {
+	mutating func cleanPath() {
 		self = cleanedPath()
 	}
 	/// The file path, but removing all double slashes (//) and resolving 'back' paths (..)
 	/// i.e. calling `"/foo///bar/baz/../thing.txt".cleanedPath()` would return `"/foo/bar/thing.txt"`
-	public func cleanedPath() -> String {
+	func cleanedPath() -> String {
 		// Remove duplicate slashes
 		var str = self
 		while str.contains("//") {
@@ -93,13 +93,13 @@ public extension String {
 	/// Join a series of paths together with this as the base
 	/// i.e. calling `"/foo".join("bar/", "../baz.txt")` will result in `"/foo/baz.txt"`
 	/// Note: This calls `cleanPath()`, so there is no need to do that yourself
-	public mutating func join(_ paths: String...) {
+	mutating func join(_ paths: String...) {
 		join(paths: paths)
 	}
 	/// Join an array of paths together with this as the base
 	/// i.e. calling `"/foo".join(paths: ["bar/", "../baz.txt"])` will result in `"/foo/baz.txt"`
 	/// Note: This calls `cleanPath()`, so there is no need to do that yourself
-	public mutating func join(paths: [String]) {
+	mutating func join(paths: [String]) {
 		for path in paths {
 			self += "/\(path)"
 		}
@@ -109,13 +109,13 @@ public extension String {
 	/// Join a series of paths together with this as the base, and return it
 	/// i.e. calling `"/foo".joining("bar/", "../baz.txt")` will return `"/foo/baz.txt"`
 	/// Note: This calls `cleanPath()`, so there is no need to do that yourself
-	public func joining(_ paths: String...) -> String {
+	func joining(_ paths: String...) -> String {
 		return joining(paths: paths)
 	}
 	/// Join an array of paths together with this as the base, and return it
 	/// i.e. calling `"/foo".joining(paths: ["bar/", "../baz.txt"])` will return `"/foo/baz.txt"`
 	/// Note: This calls `cleanPath()`, so there is no need to do that yourself
-	public func joining(paths: [String]) -> String {
+	func joining(paths: [String]) -> String {
 		var tmp = self
 		tmp.join(paths: paths)
 		return tmp
